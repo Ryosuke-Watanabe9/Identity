@@ -25,8 +25,6 @@ var caRootsPath = {
     org1_peer1 : ORGS.org1.peer1.tls_cacerts,
     org2_peer0 : ORGS.org2.peer0.tls_cacerts,
     org2_peer1 : ORGS.org2.peer1.tls_cacerts,
-    org3_peer0 : ORGS.org3.peer0.tls_cacerts,
-    org3_peer1 : ORGS.org3.peer1.tls_cacerts,
 }
 
 
@@ -36,8 +34,6 @@ let data = {
     org1peer1data : fs.readFileSync(path.join(__dirname, caRootsPath.org1_peer1)),
     org2peer0data : fs.readFileSync(path.join(__dirname, caRootsPath.org2_peer0)),
     org2peer1data : fs.readFileSync(path.join(__dirname, caRootsPath.org2_peer1)),
-    org3peer0data : fs.readFileSync(path.join(__dirname, caRootsPath.org3_peer0)),
-    org3peer1data : fs.readFileSync(path.join(__dirname, caRootsPath.org3_peer1)),
 }
 
 var peer = {
