@@ -21,7 +21,7 @@ var fabric_client = new Fabric_Client();
 fabric_client.loadFromConfig(path.join(__dirname, '../artifacts/network.yaml'))
 
 // setup the fabric network
-var channel = fabric_client.newChannel('mychannel');
+var channel = fabric_client.newChannel('identity');
 
 //add peer and orderer to the channel
 channel.addOrderer(orderer);
