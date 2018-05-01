@@ -64,8 +64,8 @@ orderers:
 
 peers:
       peer0.org1.identity.com:
-       url: grpc://13.71.137.230:7051
-       eventUrl: grpc://13.71.137.230:7053
+       url: grpc://localhost:7051
+       eventUrl: grpc://localhost:7053
        grpcOptions:
         ssl-target-name-orverride: peer0.org1.identity.com
         grpc.keepalive_time_ms: 60000
@@ -73,8 +73,8 @@ peers:
         path: ./routes/artifacts/channel/crypto/peerOrganizations/org1.identity.com/peers/peer0.org1.identity.com/msp/tlscacerts/tlsca.org1.identity.com-cert.pem
 
       peer1.org1.identity.com:
-       url: grpc://13.71.137.230:8051
-       eventUrl: grpc://13.71.137.230:8053
+       url: grpc://localhost:8051
+       eventUrl: grpc://localhost:8053
        grpcOptions:
         ssl-target-name-orverride: peer1.org1.identity.com
         grpc.keepalive_time_ms: 60000
@@ -82,8 +82,8 @@ peers:
         path: ./routes/artifacts/channel/crypto/peerOrganizations/org1.identity.com/peers/peer1.org1.identity.com/msp/tlscacerts/tlsca.org1.identity.com-cert.pem
       
       peer0.org2.identity.com:
-       url: grpc://13.71.137.230:9051
-       eventUrl: grpc://13.71.137.230:9053
+       url: grpc://localhost:9051
+       eventUrl: grpc://localhost:9053
        grpcOptions:
         ssl-target-name-orverride: peer0.org2.identity.com
         grpc.keepalive_time_ms: 60000
@@ -91,8 +91,8 @@ peers:
         path: ./routes/artifacts/channel/crypto/peerOrganizations/org2.identity.com/peers/peer0.org2.identity.com/msp/tlscacerts/tlsca.org2.identity.com-cert.pem
 
       peer1.org2.identity.com:
-       url: grpc://13.71.137.230:10051
-       eventUrl: grpc://13.71.137.230:10053
+       url: grpc://localhost:10051
+       eventUrl: grpc://localhost:10053
        grpcOptions:
         ssl-target-name-orverride: peer1.org2.identity.com
         grpc.keepalive_time_ms: 60000
@@ -101,7 +101,7 @@ peers:
 
 certificateAuthorities:
       ca-org1:
-            url: http://13.71.137.230:7054
+            url: http://localhost:7054
             httpOptions:
              verify: false
             tlsCACerts:
