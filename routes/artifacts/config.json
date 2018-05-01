@@ -1,0 +1,51 @@
+{
+	"network-config": {
+		"orderer": {
+			"url": "grpcs://13.71.137.230:7050",
+			"server-hostname": "orderer.identity.com",
+			"tls_cacerts": "../artifacts/channel/crypto/ordererOrganizations/identity.com/orderers/orderer.identity.com/tls/ca.crt"
+		},
+		"org1": {
+			"name": "peerOrg1",
+			"mspid": "Org1MSP",
+			"ca": "http://13.71.137.230:7054",
+			"peer0": {
+				"requests": "grpcs://13.71.137.230:7051",
+				"events": "grpcs://13.71.137.230:7053",
+				"server-hostname": "peer0.org1.identity.com",
+				"tls_cacerts": "../artifacts/channel/crypto/peerOrganizations/org1.identity.com/peers/peer0.org1.identity.com/tls/ca.crt"
+			},
+			"peer1": {
+				"requests": "grpcs://13.71.137.230:8051",
+				"events": "grpcs://13.71.137.230:8053",
+				"server-hostname": "peer1.org1.identity.com",
+				"tls_cacerts": "../artifacts/channel/crypto/peerOrganizations/org1.identity.com/peers/peer1.org1.identity.com/tls/ca.crt"
+			},
+			"admin": {
+				"key": "../artifacts/channel/crypto/peerOrganizations/org1.identity.com/users/Admin@org1.identity.com/msp/keystore",
+				"cert": "../artifacts/channel/crypto/peerOrganizations/org1.identity.com/users/Admin@org1.identity.com/msp/signcerts"
+			}
+		},
+		"org2": {
+			"name": "peerOrg2",
+			"mspid": "Org2MSP",
+			"ca": "http://13.71.137.230:8054",
+			"peer0": {
+				"requests": "grpcs://13.71.137.230:9051",
+				"events": "grpcs://13.71.137.230:9053",
+				"server-hostname": "peer0.org2.identity.com",
+				"tls_cacerts": "../artifacts/channel/crypto/peerOrganizations/org2.identity.com/peers/peer0.org2.identity.com/tls/ca.crt"
+			},
+			"peer1": {
+				"requests": "grpcs://13.71.137.230:10051",
+				"events": "grpcs://13.71.137.230:10053",
+				"server-hostname": "peer1.org2.identity.com",
+				"tls_cacerts": "../artifacts/channel/crypto/peerOrganizations/org2.identity.com/peers/peer1.org2.identity.com/tls/ca.crt"
+			},
+			"admin": {
+				"key": "../artifacts/channel/crypto/peerOrganizations/org2.identity.com/users/Admin@org2.identity.com/msp/keystore",
+				"cert": "../artifacts/channel/crypto/peerOrganizations/org2.identity.com/users/Admin@org2.identity.com/msp/signcerts"
+			}
+        }
+	}
+}
