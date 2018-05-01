@@ -36,7 +36,7 @@ organizations:
             certificateAuthorities:
              - ca-org1
             adminPrivateKey:
-             path: ./routes/artifacts/channel/crypto/peerOrganizations/org1.identity.com/users/Admin@org1.identity.com/msp/keystore/6d5f81d5878d91347e2398674e4cb6cef5eeb1abbc7a4e2e8f15aeed5c88f3df_sk
+             path: ./routes/artifacts/channel/crypto/peerOrganizations/org1.identity.com/users/Admin@org1.identity.com/msp/keystore/4be864a9258e697438292ea644c4cd3743eb64faf79b1ca7bc7f94c47b64d862_sk
             signedCert:
              path: ./routes/artifacts/channel/crypto/peerOrganizations/org1.identity.com/users/Admin@org1.identity.com/msp/signcerts/Admin@org1.identity.com-cert.pem
       
@@ -48,7 +48,7 @@ organizations:
             certificateAuthorities:
              - ca-org2
             adminPrivateKey:
-             path: ./routes/artifacts/channel/crypto/peerOrganizations/org2.identity.com/users/Admin@org2.identity.com/msp/keystore/7610769789b0de9ed8f2c08f7f42b085811c86c9c65491ede56ec1e2f9efdb8f_sk
+             path: ./routes/artifacts/channel/crypto/peerOrganizations/org2.identity.com/users/Admin@org2.identity.com/msp/keystore/2a79895c0e4b3394c523529ea9d604c49fd1f82643495acfc510f94909c79101_sk
             signedCert:
              path: ./routes/artifacts/channel/crypto/peerOrganizations/org2.identity.com/users/Admin@org2.identity.com/msp/signcerts/Admin@org2.identity.com-cert.pem
       
