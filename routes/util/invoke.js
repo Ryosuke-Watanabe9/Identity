@@ -106,7 +106,7 @@ module.exports.invokeFunction = function invokeFunction(user, req) {
 			// is required bacause the event registration must be signed	
 
 			let event_hub = fabric_client.newEventHub();
-			event_hub.setPeerAddr('grpcs://13.71.137.230:7053',
+			event_hub.setPeerAddr('grpcs://localhost:7053',
 				{
 					pem: peer.org1.peer0.caroots,
 					'ssl-target-name-override': peer.org1.peer0.ssl
