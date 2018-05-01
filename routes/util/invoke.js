@@ -29,10 +29,7 @@ channel.addPeer(peer.org1.peer0.peerObject);
 channel.addPeer(peer.org1.peer1.peerObject);
 channel.addPeer(peer.org2.peer0.peerObject);
 channel.addPeer(peer.org2.peer1.peerObject);
-channel.addPeer(peer.org3.peer0.peerObject);
-channel.addPeer(peer.org3.peer1.peerObject);
 
-//
 var member_user = null;
 var store_path = path.join(__dirname, '../hfc-key-store');		//routes/hfc-key-store
 var tx_id = null;

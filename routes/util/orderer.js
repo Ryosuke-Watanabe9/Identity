@@ -10,7 +10,7 @@ var FabricClient = require('fabric-client');
 
 //declear basic variable
 var ORGS;
-var logger = utils.getLogger('ir-chain create-channel');
+var logger = utils.getLogger('identity-network create-channel');
 var _commonProto = grpc.load(path.join(__dirname, '../../node_modules/fabric-client/lib/protos/common/common.proto')).common;
 var _configtxProto = grpc.load(path.join(__dirname, '../../node_modules/fabric-client/lib/protos/common/configtx.proto')).common;
 
