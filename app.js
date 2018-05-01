@@ -9,7 +9,7 @@ var session = require('express-session');
 //create user
 //require('./routes/enrollAdmin.js')
 //require('./routes/registerUser.js')
-require('./routes/util/peer.js')
+require('./routes/util/orderer.js')
 
 // routing
 var index = require('./routes/index');

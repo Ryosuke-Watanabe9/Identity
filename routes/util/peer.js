@@ -91,6 +91,4 @@ var peer = {
     },
 }
 
-console.log(peer)
-
 module.exports = peer;
