@@ -108,10 +108,9 @@ module.exports.invokeFunction = function invokeFunction(user, req) {
 			let event_hub = fabric_client.newEventHub();
 			event_hub.setPeerAddr('grpcs://localhost:7053',
 				{
-					pem: peer.org1.peer0.caroots,
+					pem:peer.org1.peer0.caroots,
 					'ssl-target-name-override': peer.org1.peer0.ssl
 				});
-
 			// using resolve the promise so that result status may be processed
 			// under the then clause rather than having the catch clause process
 			// the status
