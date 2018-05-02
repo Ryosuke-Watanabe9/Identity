@@ -69,12 +69,12 @@ func (s *SmartContract) createUser(APIstub shim.ChaincodeStubInterface, args []s
 	json.Unmarshal(maxNumberAsBytes, &maxNumber)
 
 	var tmpNumber int
-	tmpNumber, _ = strconv.Atoi(maxNumber.MaxApplicationNo)
+	tmpNumber, _ = strconv.Atoi(maxNumber.MaxUserID)
 	tmpNumber = tmpNumber + 1
 
-	maxNumber.MaxApplicationNo = strconv.Itoa(tmpNumber)
+	maxNumber.MaxUserID = strconv.Itoa(tmpNumber)
 
-	var user = user{
+	var user = User{
 		UserID:   maxNumber.MaxUserID,
 		UserInfo: args[0],
 	}
@@ -83,7 +83,7 @@ func (s *SmartContract) createUser(APIstub shim.ChaincodeStubInterface, args []s
 	userAsBytes, _ := json.Marshal(user)
 
 	APIstub.PutState("maxApplicationNo", maxNumberAsBytes)
-	APIstub.PutState(maxNumber.MaxApplicationNo, userAsBytes)
+	APIstub.PutState(maxNumber.MaxUserID, userAsBytes)
 
 	return shim.Success(nil)
 }
@@ -95,7 +95,7 @@ func (s *SmartContract) changeUserInfo(APIstub shim.ChaincodeStubInterface, args
 	}
 
 	changeUserInfoAsBytes, _ := APIstub.GetState(args[0])
-	user := user{}
+	user := User{}
 
 	json.Unmarshal(changeUserInfoAsBytes, &user)
 	user.UserInfo = args[1]
