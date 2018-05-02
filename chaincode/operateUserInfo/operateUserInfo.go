@@ -63,7 +63,7 @@ func (s *SmartContract) createUser(APIstub shim.ChaincodeStubInterface, args []s
 	}
 
 	//get maxNumber of application
-	maxNumberAsBytes, _ := APIstub.GetState("maxApplicationNo")
+	maxNumberAsBytes, _ := APIstub.GetState("maxUserID")
 
 	maxNumber := MaxNumber{}
 	json.Unmarshal(maxNumberAsBytes, &maxNumber)
