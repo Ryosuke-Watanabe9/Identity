@@ -9,14 +9,21 @@ var session = require('express-session');
 //create user
 //require('./routes/enrollAdmin.js')
 //require('./routes/registerUser.js')
-require('./routes/util/orderer.js')
 
 // routing
 var index = require('./routes/index');
 var register = require('./routes/register');
 
 var app = express();
-
+app.use(session({
+    secret: 'my-special-secret',
+    resave: false,
+    saveUninitialized: true,
+    rolling: true,
+    cookie:{
+        maxAge:1000*60*60
+    }
+}))
 app.use(express.static("public"));
 app.use(logger('dev'));
 
@@ -27,11 +34,13 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
+// route
 app.use('/', index);
 app.use('/register', register);
+
+
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

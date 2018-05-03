@@ -7,21 +7,23 @@ var router = express.Router();
 
 /* register user Infomation */
 router.post('/', function (req, res, next) {
-    id = req.body.uniqueInfo
-
     var request = {
         targets: '',
-        chaincodeId: 'mycc',
-        fun: 'invoke',
-        args:['a','b','50'],
+        chaincodeId: 'operateUserInfo',
+        fcn: 'createUser',
+        args:[req.body.userID,''],
         chainId:'identity',
         tx_id:''
     }
 
     invoke.invokeFunction('user1', request)
-
+  
+    //if invoke has finished, create login session
+    req.session.userID=req.body.userID
+    console.log(req.session.userID)
     res.render('register', {
-        title: 'register finished'
+        title: 'register finished',
+        userID:req.session.userID
     })
 });
 
