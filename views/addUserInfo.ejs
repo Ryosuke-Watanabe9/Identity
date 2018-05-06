@@ -26,44 +26,41 @@
 </head>
 
 <body id="top">
-	<!-- Header -->
-	<header id="header">
-		<div class="content">
-			<h3>
-				ようこそ
-				<%= userID %> さん
-			</h3>
-			<p>
-				今すぐ簡単に
-				<%= serviceList.length %> つのサービスを利用できます
-			</p>
-			<p>
-				<a href="/addUserInfo" class="button">使えるサービスをもっと増やす</a>
-			</p>
-			<p>
-				<a href="#one" class="button icon fa-chevron-down scrolly">すぐにサービスを利用する</a>
-			</p>
-		</div>
-	</header>
-	<section id="one" class="wrapper">
-		<div class="inner">
+	<section id="four" class="wrapper">
+		<div class="inner-narrow">
 			<section>
-				<h3>ワンクリックで簡単登録</h3>
-				<div class="box alt">
+				<h4>登録したい情報だけ入力して下さい</h4>
+				<form method="post" action="">
 					<div class="row uniform">
-						<% serviceList.forEach(function(sl){ %>
-							<div class="4u">
-								<span class="image fit">
-									<img src="./images/logo/<%= sl %>.png" />
-								</span>
-							</div>
-							<% }) %>
+						<div class="12u 12u$(xsmall)">
+							<p>アカウント名</p>
+							<input type="text" name="demo-name"  value="" placeholder="account name" />
+						</div>
+						<div class="12u 12u$(xsmall)">
+							<p>氏</p>
+							<input type="text" name="demo-name"  value="" placeholder="last name" />
+						</div>
+						<div class="12u 12u$(xsmall)">
+							<p>名</p>
+							<input type="text" name="demo-name"  value="" placeholder="first name" />
+						</div>
+						<div class="12u 12u$(xsmall)">
+							<p>電話番号</p>
+							<input type="text" name="demo-name"  value="" placeholder="phone Number" />
+						</div>
+						<div class="12u 12u$(xsmall)">
+							<p>郵便番号</p>
+							<input type="text" name="demo-name"  value="" placeholder="postalcode" />
+						</div>
+						<div class="12u 12u$(xsmall)">
+							<p>住所</p>
+							<input type="text" name="demo-name"  value="" placeholder="address" />
+						</div>
 					</div>
-				</div>
+				</form>
 			</section>
 		</div>
 	</section>
-
 	<!-- Footer -->
 	<footer id="footer">
 		<ul class="icons">
