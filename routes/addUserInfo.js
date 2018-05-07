@@ -70,7 +70,7 @@ router.get('/', function (req, res, next) {
                 console.log(query_responses[0].toString())
                 res.render('addUserInfo', {
                     title: '会員情報入力 - Identity -',
-                    userInfo:query_responses[0].toString()
+                    userInfo: query_responses[0].toString()
                 })
             }
         } else {
@@ -79,6 +79,30 @@ router.get('/', function (req, res, next) {
     }).catch((err) => {
         console.error('Failed to query successfully :: ' + err)
     });
+})
+
+router.get('/showCompanyNum', function (req, res, next) {
+
+    // we have to change query and table difinition
+    var serviceQuery = 'SELECT name from SERVICE_LIST WHERE id IN (SELECT id from SERVICE_USES_LIST WHERE email=true and accountname=false and firstname=false and lastname=false and phone=false and postalcode=false and address=false);'
+
+    // connect to mysql
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 's7_fsx..',
+        database: 'Identity'
+    })
+
+    connection.connect()
+    connection.query(serviceQuery, function (error, rows, fields) {
+        if (error) {
+            console.log(error)
+        } else {
+            connection.end()
+            res.json(rows)
+        }
+    })
 })
 
 module.exports = router

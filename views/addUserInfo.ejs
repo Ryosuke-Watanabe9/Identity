@@ -23,6 +23,24 @@
 	<script src="./js/util.js"></script>
 	<!--[if lte IE 8]><script src="./js/ie/respond.min.js"></script><![endif]-->
 	<script src="./js/main.js"></script>
+
+	<script>
+		function alterValue($this){
+			var userInfo = []
+			userInfo.push($('#accountname').val())
+			userInfo.push($('#lastname').val())
+			userInfo.push($('#firstname').val())
+			userInfo.push($('#phonenumber').val())
+			userInfo.push($('#postalcode').val())
+			userInfo.push($('#address').val())
+			
+			$.getJSON("/addUserInfo/showCompanyNum",{
+				userInfo
+			},function(num){
+				console.log("あなたが使えるサービスは" + num + "つです！")
+			})
+		}
+	</script>
 </head>
 
 <body id="top">
@@ -34,27 +52,27 @@
 					<div class="row uniform">
 						<div class="12u 12u$(xsmall)">
 							<p>アカウント名</p>
-							<input type="text" name="demo-name"  value="" placeholder="account name" />
+							<input type="text" id="accountname"  value="" placeholder="account name" onChange="alterValue(this)"/>
 						</div>
 						<div class="12u 12u$(xsmall)">
 							<p>氏</p>
-							<input type="text" name="demo-name"  value="" placeholder="last name" />
+							<input type="text" id="lastname"  value="" placeholder="last name" onChange="alterValue(this)"/>
 						</div>
 						<div class="12u 12u$(xsmall)">
 							<p>名</p>
-							<input type="text" name="demo-name"  value="" placeholder="first name" />
+							<input type="text" id="firstname"  value="" placeholder="first name" onChange="alterValue(this)"/>
 						</div>
 						<div class="12u 12u$(xsmall)">
 							<p>電話番号</p>
-							<input type="text" name="demo-name"  value="" placeholder="phone Number" />
+							<input type="text" id="phonenumber"  value="" placeholder="phone Number" onChange="alterValue(this)"/>
 						</div>
 						<div class="12u 12u$(xsmall)">
 							<p>郵便番号</p>
-							<input type="text" name="demo-name"  value="" placeholder="postalcode" />
+							<input type="text" id="postalcode"  value="" placeholder="postalcode" onChange="alterValue(this)"/>
 						</div>
 						<div class="12u 12u$(xsmall)">
 							<p>住所</p>
-							<input type="text" name="demo-name"  value="" placeholder="address" />
+							<input type="text" id="address"  value="" placeholder="address" onChange="alterValue(this)"/>
 						</div>
 					</div>
 				</form>
