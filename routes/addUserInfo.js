@@ -83,8 +83,19 @@ router.get('/', function (req, res, next) {
 
 router.get('/showCompanyNum', function (req, res, next) {
 
+    var flgList = []
+    for(i=0; i<req.query.userInfo.length; i++){
+        if(req.query.userInfo[i] == "" || req.query.userInfo[i] == null){
+            flgList.push(false)
+        }else{
+            flgList.push(true)
+        }
+    }
+
+    console.log(flgList)
+
     // we have to change query and table difinition
-    var serviceQuery = 'SELECT name from SERVICE_LIST WHERE id IN (SELECT id from SERVICE_USES_LIST WHERE email=true and accountname=false and firstname=false and lastname=false and phone=false and postalcode=false and address=false);'
+    var serviceQuery = 'SELECT name from SERVICE_LIST WHERE id IN (SELECT id from SERVICE_USES_LIST WHERE email=true and accountname=? and firstname=? and lastname=? and phone=? and postalcode=? and address=?);'
 
     // connect to mysql
     var connection = mysql.createConnection({
@@ -95,7 +106,11 @@ router.get('/showCompanyNum', function (req, res, next) {
     })
 
     connection.connect()
-    connection.query(serviceQuery, function (error, rows, fields) {
+    connection.query({
+        sql: serviceQuery,
+        timeout: 40000,     // 40s
+        values: [flgList]
+    }, function (error, rows, fields) {
         if (error) {
             console.log(error)
         } else {
