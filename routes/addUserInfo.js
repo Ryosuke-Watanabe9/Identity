@@ -109,13 +109,13 @@ router.get('/showCompanyNum', function (req, res, next) {
     connection.query({
         sql: serviceQuery,
         timeout: 40000,     // 40s
-        values: [flgList]
+        values: flgList
     }, function (error, rows, fields) {
         if (error) {
             console.log(error)
         } else {
             connection.end()
-            res.json(rows)
+            res.json(rows.length)
         }
     })
 })
