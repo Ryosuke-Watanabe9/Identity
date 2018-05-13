@@ -52,27 +52,27 @@
 					<div class="row uniform">
 						<div class="12u 12u$(xsmall)">
 							<p>アカウント名</p>
-							<input type="text" id="accountname"  value="" placeholder="account name" onChange="alterValue(this)"/>
+							<input type="text" id="accountname" name="accountname" value="" placeholder="account name" onChange="alterValue(this)"/>
 						</div>
 						<div class="12u 12u$(xsmall)">
 							<p>氏</p>
-							<input type="text" id="lastname"  value="" placeholder="last name" onChange="alterValue(this)"/>
+							<input type="text" id="lastname" name="lastname"  value="" placeholder="last name" onChange="alterValue(this)"/>
 						</div>
 						<div class="12u 12u$(xsmall)">
 							<p>名</p>
-							<input type="text" id="firstname"  value="" placeholder="first name" onChange="alterValue(this)"/>
+							<input type="text" id="firstname" name="firstname" value="" placeholder="first name" onChange="alterValue(this)"/>
 						</div>
 						<div class="12u 12u$(xsmall)">
 							<p>電話番号</p>
-							<input type="text" id="phonenumber"  value="" placeholder="phone Number" onChange="alterValue(this)"/>
+							<input type="text" id="phonenumber" name="phonenumber" value="" placeholder="phone Number" onChange="alterValue(this)"/>
 						</div>
 						<div class="12u 12u$(xsmall)">
 							<p>郵便番号</p>
-							<input type="text" id="postalcode"  value="" placeholder="postalcode" onChange="alterValue(this)"/>
+							<input type="text" id="postalcode" name="postalcode" value="" placeholder="postalcode" onChange="alterValue(this)"/>
 						</div>
 						<div class="12u 12u$(xsmall)">
 							<p>住所</p>
-							<input type="text" id="address"  value="" placeholder="address" onChange="alterValue(this)"/>
+							<input type="text" id="address" name="address" value="" placeholder="address" onChange="alterValue(this)"/>
 						</div>
 					</div>
 					<p>
@@ -86,29 +86,7 @@
 			</section>
 		</div>
 	</section>
-	<!-- Footer -->
-	<footer id="footer">
-		<ul class="icons">
-			<li>
-				<a href="#" class="icon fa-facebook">
-					<span class="label">Facebook</span>
-				</a>
-			</li>
-			<li>
-				<a href="#" class="icon fa-twitter">
-					<span class="label">Twitter</span>
-				</a>
-			</li>
-			<li>
-				<a href="#" class="icon fa-instagram">
-					<span class="label">Instagram</span>
-				</a>
-			</li>
-		</ul>
-		<p class="copyright">&copy; Untitled. Credits:
-			<a href="http://html5up.net">HTML5 UP</a>
-		</p>
-	</footer>
+	<%include common/footer %>
 </body>
 
 </html>

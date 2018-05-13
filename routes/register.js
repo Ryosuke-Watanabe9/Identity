@@ -25,7 +25,7 @@ router.post('/', function (req, res, next) {
     invoke.invokeFunction('user1', request)
 
     // we have to change query and table difinition
-    var serviceQuery = 'SELECT name from SERVICE_LIST WHERE id IN (SELECT id from SERVICE_USES_LIST WHERE email=true and accountname=false and firstname=false and lastname=false and phone=false and postalcode=false and address=false);'
+    var serviceQuery = 'SELECT name,income from SERVICE_LIST WHERE id IN (SELECT id from SERVICE_USES_LIST WHERE email=true and accountname=false and firstname=false and lastname=false and phone=false and postalcode=false and address=false);'
 
     // connect to mysql
     var connection = mysql.createConnection({
@@ -41,11 +41,13 @@ router.post('/', function (req, res, next) {
             console.log(error)
         } else {
             for (i = 0; i < rows.length; i++) {
-                serviceList.push(rows[i].name)
-                console.log(rows[i].name)
+                data = {
+                    name:rows[i].name,
+                    income:rows[i].income
+                }
+                serviceList.push(data)
             }
         }
-
         console.log(serviceList)
         connection.end()
 

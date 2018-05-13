@@ -14,6 +14,7 @@ var session = require('express-session')
 var index = require('./routes/index')
 var register = require('./routes/register')
 var addUserInfo = require('./routes/addUserInfo')
+var addFinished = require('./routes/addFinished')
 
 var app = express()
 app.use(session({
@@ -39,7 +40,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/', index)
 app.use('/register', register)
 app.use('/addUserInfo', addUserInfo)
-
+app.use('/addFinished', addFinished)
 
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))

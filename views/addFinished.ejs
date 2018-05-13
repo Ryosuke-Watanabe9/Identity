@@ -26,42 +26,10 @@
 </head>
 
 <body id="top">
-	<!-- Header -->
-	<header id="header">
-		<div class="content">
-			<h3>
-				ようこそ
-				<%= userID %> さん
-			</h3>
-			<p>
-				今すぐ簡単に
-				<%= serviceList.length %> つのサービスを利用できます
-			</p>
-			<p>
-				<a href="/addUserInfo" class="button">使えるサービスをもっと増やす</a>
-			</p>
-			<p>
-				<a href="#one" class="button icon fa-chevron-down scrolly">すぐにサービスを利用する</a>
-			</p>
-		</div>
-	</header>
-	<section id="one" class="wrapper">
-		<div class="inner">
-			<section>
-				<h3>ワンクリックで簡単登録</h3>
-				<div class="box alt">
-					<div class="row uniform">
-						<% serviceList.forEach(function(sl){ %>
-							<div class="4u">
-								<span class="image fit">
-									<img src="./images/logo/<%= sl.name %>.png" />
-								</span>
-								<%= sl.income %>
-							</div>
-							<% }) %>
-					</div>
-				</div>
-			</section>
+	<section id="four" class="wrapper">
+		<div class="inner-narrow">
+			変更完了！
+			反映後の通知メールをお待ちください。
 		</div>
 	</section>
 	<%include common/footer %>

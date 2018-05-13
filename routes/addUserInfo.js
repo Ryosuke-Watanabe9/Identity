@@ -67,7 +67,6 @@ router.get('/', function (req, res, next) {
             if (query_responses[0] instanceof Error) {
                 console.error("error from query = ", query_responses[0])
             } else {
-                console.log(query_responses[0].toString())
                 res.render('addUserInfo', {
                     title: '会員情報入力 - Identity -',
                     userInfo: query_responses[0].toString()
@@ -91,8 +90,6 @@ router.get('/showCompanyNum', function (req, res, next) {
             flgList.push(true)
         }
     }
-
-    console.log(flgList)
 
     // we have to change query and table difinition
     var serviceQuery = 'SELECT name from SERVICE_LIST WHERE id IN (SELECT id from SERVICE_USES_LIST WHERE email=true and accountname=? and firstname=? and lastname=? and phone=? and postalcode=? and address=?);'
