@@ -27,12 +27,31 @@
 	<script>
 		function alterValue($this){
 			var userInfo = []
-			userInfo.push($('#accountname').val())
-			userInfo.push($('#lastname').val())
-			userInfo.push($('#firstname').val())
-			userInfo.push($('#phonenumber').val())
-			userInfo.push($('#postalcode').val())
-			userInfo.push($('#address').val())
+
+			userInfo.push({
+				name:'accountname',
+				value:$('#accountname').val()
+			})
+			userInfo.push({
+				name:'lastname',
+				value:$('#lastname').val()
+			})
+			userInfo.push({
+				name:'firstname',
+				value:$('#firstname').val()
+			})
+			userInfo.push({
+				name:'phonenumber',
+				value:$('#phonenumber').val()
+			})
+			userInfo.push({
+				name:'postalcode',
+				value:$('#postalcode').val()
+			})
+			userInfo.push({
+				name:'address',
+				value:$('#address').val()
+			})
 			
 			$.getJSON("/addUserInfo/showCompanyNum",{
 				userInfo

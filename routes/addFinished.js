@@ -13,16 +13,6 @@ var router = express.Router();
 /* change user Infomation */
 router.post('/', function (req, res, next) {
     var userInfo = JSON.stringify(req.body).replace(/"/g,'\\"')
-    /*
-    var flgList = []
-    for(i=0; i<req.query.userInfo.length; i++){
-        if(req.query.userInfo[i] == "" || req.query.userInfo[i] == null){
-            flgList.push(false)
-        }else{
-            flgList.push(true)
-        }
-    }
-    */
 
     console.log("\""+userInfo+"\"")
     var request = {

@@ -81,18 +81,34 @@ router.get('/', function (req, res, next) {
 })
 
 router.get('/showCompanyNum', function (req, res, next) {
-
-    var flgList = []
+    var query = 'SELECT name from SERVICE_LIST WHERE id IN(SELECT id from SERVICE_USES_LIST WHERE (email = 1'
+    var trueList = []
+    var falseList = []
     for(i=0; i<req.query.userInfo.length; i++){
-        if(req.query.userInfo[i] == "" || req.query.userInfo[i] == null){
-            flgList.push(false)
+        if(req.query.userInfo[i].value == "" || req.query.userInfo[i].value == null){
+            falseList.push([req.query.userInfo[i].name])
         }else{
-            flgList.push(true)
+            trueList.push([req.query.userInfo[i].name])
         }
     }
-
-    // we have to change query and table difinition
-    var serviceQuery = 'SELECT name from SERVICE_LIST WHERE id IN (SELECT id from SERVICE_USES_LIST WHERE email=true and accountname=? and firstname=? and lastname=? and phone=? and postalcode=? and address=?);'
+    for(i=0; i<trueList.length; i++){
+        if(i == trueList.length-1){
+            query = query + " or " + trueList[i] + " = 1)"
+        }else{
+            query = query + " or " + trueList[i] + " = 1"
+        }
+    }
+    if(falseList.length == 0){
+        query = query + ")"
+    }else{
+        for(i=0; i<falseList.length; i++){
+            if(i == falseList.length-1){
+                query = query + " and " + falseList[i] + " = 0)"
+            }else{
+                query = query + " and " + falseList[i] + " = 0"
+            }
+        }
+    }
 
     // connect to mysql
     var connection = mysql.createConnection({
@@ -104,9 +120,8 @@ router.get('/showCompanyNum', function (req, res, next) {
 
     connection.connect()
     connection.query({
-        sql: serviceQuery,
-        timeout: 40000,     // 40s
-        values: flgList
+        sql: query,
+        timeout: 40000
     }, function (error, rows, fields) {
         if (error) {
             console.log(error)
