@@ -26,54 +26,60 @@
 </head>
 
 <body id="top">
+	<script>
+		window.fbAsyncInit = function () {
+			FB.init({
+				appId: '310147799515871',
+				cookie: true,
+				xfbml: true,
+				version: 'v2.8'
+			});
+			FB.AppEvents.logPageView();
+		};
+		FB.getLoginStatus(function (response) {
+			statusChangeCallback(response);
+		});
+		(function (d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) { return; }
+			js = d.createElement(s); js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
 	<!-- Header -->
 	<header id="header">
 		<div class="content">
-			<h3>
-				ようこそ
-				<%= userID %> さん
-			</h3>
+			<h1>
+				<a href="#">Demo Page</a>
+			</h1>
 			<p>
-				今すぐ簡単に
-				<%= serviceList.length %> つのサービスを利用できます
+				以下の内容で登録しますか？
 			</p>
-			<p>
-				<a href="/addUserInfo" class="button">使えるサービスをもっと増やす</a>
-			</p>
-			<p>
-				<a href="#one" class="button icon fa-chevron-down scrolly">すぐにサービスを利用する</a>
-			</p>
-		</div>
-	</header>
-	<section id="one" class="wrapper">
-		<div class="inner">
 			<section>
-				<h3>ワンクリックで簡単登録</h3>
-				<div class="box alt">
+				<form method="post" action="/register">
 					<div class="row uniform">
-						<% serviceList.forEach(function(sl){ %>
-							<div class="3u">
-								<span class="image fit">
-									<% if(sl.name == "Demo Page") { %>
-										<a href="/demo">
-											<img src="./images/logo/<%= sl.name %>.png" />
-										</a>
-									<% }else { %>
-										<a href="#">
-											<img src="./images/logo/<%= sl.name %>.png" />
-										</a>
-									<% } %>
-								</span>
-								登録で
-								<%= sl.income %>ポイント獲得
+						<div class="12u$">
+							<div class="12u 12u$(xsmall)">
+								<input type="text" name="userID" id="userID" value="<%= userID %>" />
 							</div>
-						<% }) %>
+							<p>
+							</p>
+							<ul class="actions">
+								<li>
+									<input type="submit" value="Join Now!!" class="special" />
+								</li>
+							</ul>
+						</div>
 					</div>
-				</div>
+				</form>
 			</section>
 		</div>
-	</section>
+		
+	</header>
+
 	<%include common/footer %>
+
 </body>
 
 </html>

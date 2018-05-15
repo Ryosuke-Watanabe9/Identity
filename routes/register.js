@@ -9,6 +9,53 @@ var peer = require('./util/peer.js')
 var orderer = require('./util/orderer.js')
 var router = express.Router();
 
+// if user logged in, get service list which the user can user by 1 click
+router.get('/', function (req, res, next) {
+    var serviceList = []
+    var request = {
+        targets: '',
+        chaincodeId: 'operateUserInfo',
+        fcn: 'createUser',
+        args: [req.body.userID, ''],
+        chainId: 'identity',
+        tx_id: ''
+    }
+
+    // we have to change query and table difinition
+    var serviceQuery = 'SELECT name,income from SERVICE_LIST WHERE id IN (SELECT id from SERVICE_USES_LIST WHERE email=true and accountname=false and firstname=false and lastname=false and phonenumber=false and postalcode=false and address=false);'
+
+    // connect to mysql
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 's7_fsx..',
+        database: 'Identity'
+    })
+
+    connection.connect()
+    connection.query(serviceQuery, function (error, rows, fields) {
+        if (error) {
+            console.log(error)
+        } else {
+            for (i = 0; i < rows.length; i++) {
+                data = {
+                    name:rows[i].name,
+                    income:rows[i].income
+                }
+                serviceList.push(data)
+            }
+        }
+        connection.end()
+
+        //if invoke has finished, create login session
+        req.session.userID = req.body.userID
+        res.render('register', {
+            title: 'register finished',
+            userID: req.session.userID,
+            serviceList: serviceList
+        })
+    })
+});
 
 /* register user Infomation */
 router.post('/', function (req, res, next) {
