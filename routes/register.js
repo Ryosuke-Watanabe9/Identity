@@ -11,49 +11,102 @@ var router = express.Router();
 
 // if user logged in, get service list which the user can user by 1 click
 router.get('/', function (req, res, next) {
-    var serviceList = []
-    var request = {
-        targets: '',
-        chaincodeId: 'operateUserInfo',
-        fcn: 'createUser',
-        args: [req.body.userID, ''],
-        chainId: 'identity',
-        tx_id: ''
-    }
 
-    // we have to change query and table difinition
-    var serviceQuery = 'SELECT name,income from SERVICE_LIST WHERE id IN (SELECT id from SERVICE_USES_LIST WHERE email=true and accountname=false and firstname=false and lastname=false and phonenumber=false and postalcode=false and address=false);'
+    //create new fabric client
+    var fabric_client = new Fabric_Client()
+    fabric_client.loadFromConfig(path.join(__dirname, './artifacts/network.yaml'))
 
-    // connect to mysql
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 's7_fsx..',
-        database: 'Identity'
-    })
+    // setup the fabric network
+    var channel = fabric_client.newChannel('identity')
 
-    connection.connect()
-    connection.query(serviceQuery, function (error, rows, fields) {
-        if (error) {
-            console.log(error)
+    // add peer and orderer to the channel
+    channel.addOrderer(orderer)
+    channel.addPeer(peer.org1.peer0.peerObject)
+    channel.addPeer(peer.org1.peer1.peerObject)
+    channel.addPeer(peer.org2.peer0.peerObject)
+    channel.addPeer(peer.org2.peer1.peerObject)
+
+    //
+    var member_user = null
+    var store_path = path.join(__dirname, './hfc-key-store')
+    var tx_id = null
+
+    Fabric_Client.newDefaultKeyValueStore({
+        path: store_path
+    }).then((state_store) => {
+        // assign the store to the fabric client
+        fabric_client.setStateStore(state_store)
+        var crypto_suite = Fabric_Client.newCryptoSuite()
+        // use the same location for the state store (where the users' certificate are kept)
+        // and the crypto store (where the users' keys are kept)
+        var crypto_store = Fabric_Client.newCryptoKeyStore({ path: store_path })
+        crypto_suite.setCryptoKeyStore(crypto_store)
+        fabric_client.setCryptoSuite(crypto_suite)
+
+        // get the enrolled user from persistence, this user will sign all requests
+        return fabric_client.getUserContext('user1', true)
+    }).then((user_from_store) => {
+        if (user_from_store && user_from_store.isEnrolled()) {
+            console.log('Successfully loaded user1 from persistence')
+            member_user = user_from_store
         } else {
-            for (i = 0; i < rows.length; i++) {
-                data = {
-                    name:rows[i].name,
-                    income:rows[i].income
-                }
-                serviceList.push(data)
-            }
+            throw new Error('Failed to get user1 ... run registerUser.js')
         }
-        connection.end()
+        var request = {
+            targets: peer.org1.peer0.peerObject,
+            chaincodeId: 'operateUserInfo',
+            fcn: 'queryUserInfo',
+            args: [req.session.userID]
+        }
+        // send the query proposal to the peer
+        return channel.queryByChaincode(request)
+    }).then((query_responses) => {
+        console.log("Query has completed, checking results")
+        // query_responses could have more than one  results if there multiple peers were used as targets
+        if (query_responses && query_responses.length == 1) {
+            if (query_responses[0] instanceof Error) {
+                console.error("error from query = ", query_responses[0])
+            } else {
 
-        //if invoke has finished, create login session
-        req.session.userID = req.body.userID
-        res.render('register', {
-            title: 'register finished',
-            userID: req.session.userID,
-            serviceList: serviceList
-        })
+                console.log(query_responses[0].toString())
+
+                var serviceList = []
+                // we have to change query and table difinition
+                var serviceQuery = 'SELECT name,income from SERVICE_LIST WHERE id IN (SELECT id from SERVICE_USES_LIST WHERE email=true and accountname=false and firstname=false and lastname=false and phonenumber=false and postalcode=false and address=false);'
+
+                // connect to mysql
+                var connection = mysql.createConnection({
+                    host: 'localhost',
+                    user: 'root',
+                    password: 's7_fsx..',
+                    database: 'Identity'
+                })
+                connection.connect()
+                connection.query(serviceQuery, function (error, rows, fields) {
+                    if (error) {
+                        console.log(error)
+                    } else {
+                        for (i = 0; i < rows.length; i++) {
+                            data = {
+                                name: rows[i].name,
+                                income: rows[i].income
+                            }
+                            serviceList.push(data)
+                        }
+                    }
+                    connection.end()
+                })
+                res.render('register', {
+                    title: 'register finished',
+                    userID: req.session.userID,
+                    serviceList: serviceList
+                })
+            }
+        } else {
+            console.log("No payloads were returned from query")
+        }
+    }).catch((err) => {
+        console.error('Failed to query successfully :: ' + err)
     })
 });
 
@@ -89,8 +142,8 @@ router.post('/', function (req, res, next) {
         } else {
             for (i = 0; i < rows.length; i++) {
                 data = {
-                    name:rows[i].name,
-                    income:rows[i].income
+                    name: rows[i].name,
+                    income: rows[i].income
                 }
                 serviceList.push(data)
             }
