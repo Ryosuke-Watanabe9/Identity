@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--[if lte IE 8]><script src="./js/ie/html5shiv.js"></script><![endif]-->
     <link rel="stylesheet" href="./stylesheets/css/main.css" />
+    <link rel="stylesheet" href="./stylesheets/luxbar.min.css">
     <!--[if lte IE 8]><link rel="stylesheet" href="./css/ie8.css" /><![endif]-->
     <!--[if lte IE 9]><link rel="stylesheet" href="./css/ie9.css" /><![endif]-->
 
@@ -26,36 +27,22 @@
 </head>
 
 <body>
-    <div id="menu-box">
-        <div id="toggle">
-            <a href="#">menu</a>
+    <header id="luxbar" class="luxbar-fixed">
+        <input type="checkbox" id="luxbar-checkbox"/>
+        <div class="luxbar-menu luxbar-menu-right luxbar-menu-material-cyan">
+            <ul class="luxbar-navigation">
+                <li class="luxbar-header">
+                    <a href="#" class="luxbar-brand">ロゴ</a>
+                    <label class="luxbar-hamburger luxbar-hamburger-doublespin" 
+                    id="luxbar-hamburger" for="luxbar-checkbox"> <span></span> </label>
+                </li>
+                <li class="luxbar-item"><a href="#">アイテム 1</a></li>
+                <li class="luxbar-item"><a href="#">アイテム 2</a></li>
+                <li class="luxbar-item"><a href="#">アイテム 3</a></li>
+                <li class="luxbar-item"><a href="#">アイテム 4</a></li>
+            </ul>
         </div>
-        <ul id="menu" class="">
-            <li>
-                <a href="#">html</a>
-            </li>
-            <li>
-                <a href="#">css</a>
-            </li>
-            <li>
-                <a href="#">javascript</a>
-            </li>
-            <li>
-                <a href="#">php</a>
-            </li>
-            <li>
-                <a href="#">CGI</a>
-            </li>
-            <li>
-                <a href="#">Python</a>
-            </li>
-            <li>
-                <a href="#">Ruby</a>
-            </li>
-            <li>
-                <a href="#">java</a>
-            </li>
-        </ul>
+    </header>
 </body>
 
 </html>
