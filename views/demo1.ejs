@@ -26,6 +26,7 @@
 </head>
 
 <body id="top">
+		<%include common/header %>
 	<script>
 		window.fbAsyncInit = function () {
 			FB.init({
@@ -51,10 +52,10 @@
 	<header id="header">
 		<div class="content">
 			<h1>
-				<a href="#">Demo Page</a>
+				<a href="#">Demo Service1</a>
 			</h1>
 			<p>
-				以下の内容で登録しますか？
+				以下の内容で登録完了しました
 			</p>
 			<section>
 				<form method="post" action="/register">
@@ -63,13 +64,6 @@
 							<div class="12u 12u$(xsmall)">
 								<input type="text" name="userID" id="userID" value="<%= userID %>" />
 							</div>
-							<p>
-							</p>
-							<ul class="actions">
-								<li>
-									<input type="submit" value="Join Now!!" class="special" />
-								</li>
-							</ul>
 						</div>
 					</div>
 				</form>

@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<!--
+	Fractal by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>
+		<%= title %>
+	</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--[if lte IE 8]><script src="./js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="./stylesheets/css/main.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="./css/ie8.css" /><![endif]-->
+	<!--[if lte IE 9]><link rel="stylesheet" href="./css/ie9.css" /><![endif]-->
+
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/jquery.scrolly.min.js"></script>
+	<script src="./js/skel.min.js"></script>
+	<script src="./js/util.js"></script>
+	<!--[if lte IE 8]><script src="./js/ie/respond.min.js"></script><![endif]-->
+	<script src="./js/main.js"></script>
+</head>
+
+<body id="top">
+		<%include common/header %>
+	<script>
+		window.fbAsyncInit = function () {
+			FB.init({
+				appId: '310147799515871',
+				cookie: true,
+				xfbml: true,
+				version: 'v2.8'
+			});
+			FB.AppEvents.logPageView();
+		};
+		FB.getLoginStatus(function (response) {
+			statusChangeCallback(response);
+		});
+		(function (d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) { return; }
+			js = d.createElement(s); js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+	<!-- Header -->
+	<header id="header">
+		<div class="content">
+			<h1>
+				<a href="#">Demo Service2</a>
+			</h1>
+			<p>
+				以下の内容で登録しますか？
+			</p>
+			<section>
+				<form method="post" action="/register">
+					<div class="row uniform">
+						<div class="12u$">
+							<div class="12u 12u$(xsmall)">
+								<input type="text" name="userID" id="userID" value="<%= userID %>" />
+							</div>
+						</div>
+					</div>
+				</form>
+			</section>
+		</div>
+		
+	</header>
+
+	<%include common/footer %>
+
+</body>
+
+</html>

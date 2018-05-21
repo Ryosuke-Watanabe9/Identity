@@ -12,10 +12,12 @@ var session = require('express-session')
 
 // routing
 var index = require('./routes/index')
+var logout = require('./routes/logout')
 var register = require('./routes/register')
 var addUserInfo = require('./routes/addUserInfo')
 var addFinished = require('./routes/addFinished')
-var demo = require('./routes/demo')                 // after demo, delete
+var demo1 = require('./routes/demo1')                 // after demo, delete
+var demo2 = require('./routes/demo2')                 // after demo, delete
 
 var app = express()
 app.use(session({
@@ -39,10 +41,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // route
 app.use('/', index)
+app.use('/logout', logout)
 app.use('/register', register)
 app.use('/addUserInfo', addUserInfo)
 app.use('/addFinished', addFinished)
-app.use('/demo', demo)
+app.use('/demo1', demo1)
+app.use('/demo2', demo2)
 
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))

@@ -3648,7 +3648,7 @@
 	#header {
 		background-color: #4696e5;
 		color: #d0e4f8;
-		padding: 4.5em 0 2.5em 0 ;
+		padding: 9.5em 0 2.5em 0 ;
 		-moz-align-items: center;
 		-webkit-align-items: center;
 		-ms-align-items: center;
@@ -3665,8 +3665,8 @@
 		background-position: top left, center center;
 		background-attachment: fixed, fixed;
 		background-size: auto, cover;
-		height: 100vh;
-		min-height: 35em;
+		height: 85vh;
+		min-height: 30em;
 	}
 
 		#header input[type="submit"],

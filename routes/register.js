@@ -142,6 +142,7 @@ router.post('/', function (req, res, next) {
         } else {
             for (i = 0; i < rows.length; i++) {
                 data = {
+                    id: rows[i].id,
                     name: rows[i].name,
                     income: rows[i].income
                 }

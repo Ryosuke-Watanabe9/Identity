@@ -27,6 +27,7 @@
 
 <body id="top">
 	<!-- Header -->
+	<%include common/header %>
 	<header id="header">
 		<div class="content">
 			<h3>
@@ -54,11 +55,15 @@
 						<% serviceList.forEach(function(sl){ %>
 							<div class="3u">
 								<span class="image fit">
-									<% if(sl.name == "Demo Page") { %>
-										<a href="/demo">
+									<% if(sl.name == "Demo Page1") { %>
+										<a href="/demo1?income=<%= sl.income %>">
 											<img src="./images/logo/<%= sl.name %>.png" />
 										</a>
-									<% }else { %>
+									<% }else if (sl.name == "Demo Page2"){ %>
+										<a href="/demo2?income=<%= sl.income %>">
+											<img src="./images/logo/<%= sl.name %>.png" />
+										</a>
+									<% } else { %>
 										<a href="#">
 											<img src="./images/logo/<%= sl.name %>.png" />
 										</a>
