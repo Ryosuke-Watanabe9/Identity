@@ -67,12 +67,40 @@ router.get('/', function (req, res, next) {
             if (query_responses[0] instanceof Error) {
                 console.error("error from query = ", query_responses[0])
             } else {
+                str = query_responses[0].toString()
+                str = str.replace(/\\|\\/g,"")
+                str = str.replace(/\"\"/g,"")
+                str = JSON.parse(str)
 
-                console.log(query_responses[0].toString())
+                var query = 'SELECT name from SERVICE_LIST WHERE id IN(SELECT id from SERVICE_USES_LIST WHERE (email = 1'
+                var trueList = []
+                var falseList = []
 
-                var serviceList = []
-                // we have to change query and table difinition
-                var serviceQuery = 'SELECT name,income from SERVICE_LIST WHERE id IN (SELECT id from SERVICE_USES_LIST WHERE email=true and accountname=false and firstname=false and lastname=false and phonenumber=false and postalcode=false and address=false);'
+                for (var member in str.userInfo){
+                    if (str.userInfo[member] == "" || str.userInfo[member] == null) {
+                        falseList.push(member)
+                    } else {
+                        trueList.push(member)
+                    }
+                }
+                for (i = 0; i < trueList.length; i++) {
+                    if (i == trueList.length - 1) {
+                        query = query + " or " + trueList[i] + " = 1)"
+                    } else {
+                        query = query + " or " + trueList[i] + " = 1"
+                    }
+                }
+                if (falseList.length == 0) {
+                    query = query + ")"
+                } else {
+                    for (i = 0; i < falseList.length; i++) {
+                        if (i == falseList.length - 1) {
+                            query = query + " and " + falseList[i] + " = 0)"
+                        } else {
+                            query = query + " and " + falseList[i] + " = 0"
+                        }
+                    }
+                }
 
                 // connect to mysql
                 var connection = mysql.createConnection({
@@ -81,25 +109,23 @@ router.get('/', function (req, res, next) {
                     password: 's7_fsx..',
                     database: 'Identity'
                 })
+
                 connection.connect()
-                connection.query(serviceQuery, function (error, rows, fields) {
+                connection.query({
+                    sql: query,
+                    timeout: 40000
+                }, function (error, rows, fields) {
                     if (error) {
                         console.log(error)
                     } else {
-                        for (i = 0; i < rows.length; i++) {
-                            data = {
-                                name: rows[i].name,
-                                income: rows[i].income
-                            }
-                            serviceList.push(data)
-                        }
+                        connection.end()
+                        console.log(rows)
+                        res.render('register', {
+                            title: 'register finished',
+                            userID: req.session.userID,
+                            serviceList: rows
+                        })
                     }
-                    connection.end()
-                })
-                res.render('register', {
-                    title: 'register finished',
-                    userID: req.session.userID,
-                    serviceList: serviceList
                 })
             }
         } else {
@@ -159,6 +185,6 @@ router.post('/', function (req, res, next) {
             serviceList: serviceList
         })
     })
-});
+})
 
-module.exports = router;
+module.exports = router

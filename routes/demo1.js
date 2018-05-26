@@ -8,7 +8,7 @@ var router = express.Router()
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    var serviceQuery = 'INSERT INTO DEMO_PAGE1 VALUES(0,?);'
+    var serviceQuery = 'INSERT INTO DEMO_PAGE1 VALUES(0,?,?);'
 
     console.log(req.session.userID)
 
@@ -21,7 +21,7 @@ router.get('/', function (req, res, next) {
     })
 
     connection.connect()
-    connection.query(serviceQuery,[req.session.userID], function (error, result) {
+    connection.query(serviceQuery,[req.session.userID,'09022280685'], function (error, result) {
         if (error) {
             console.log(error)
         } else {

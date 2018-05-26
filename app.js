@@ -7,8 +7,8 @@ var bodyParser = require('body-parser')
 var session = require('express-session')
 
 //create user
-//require('./routes/enrollAdmin.js')
-//require('./routes/registerUser.js')
+//require('./routes/util/enrollAdmin.js')
+//require('./routes/util/registerUser.js')
 
 // routing
 var index = require('./routes/index')
@@ -16,6 +16,7 @@ var logout = require('./routes/logout')
 var register = require('./routes/register')
 var addUserInfo = require('./routes/addUserInfo')
 var addFinished = require('./routes/addFinished')
+var showMyPage = require('./routes/showMyPage')
 var demo1 = require('./routes/demo1')                 // after demo, delete
 var demo2 = require('./routes/demo2')                 // after demo, delete
 
@@ -45,6 +46,7 @@ app.use('/logout', logout)
 app.use('/register', register)
 app.use('/addUserInfo', addUserInfo)
 app.use('/addFinished', addFinished)
+app.use('/showMyPage', showMyPage)
 app.use('/demo1', demo1)
 app.use('/demo2', demo2)
 

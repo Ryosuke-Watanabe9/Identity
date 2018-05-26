@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<!--
+	Fractal by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>
+		<%= title %>
+	</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--[if lte IE 8]><script src="./js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="./stylesheets/css/main.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="./css/ie8.css" /><![endif]-->
+	<!--[if lte IE 9]><link rel="stylesheet" href="./css/ie9.css" /><![endif]-->
+
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/jquery.scrolly.min.js"></script>
+	<script src="./js/skel.min.js"></script>
+	<script src="./js/util.js"></script>
+	<!--[if lte IE 8]><script src="./js/ie/respond.min.js"></script><![endif]-->
+	<script src="./js/main.js"></script>
+
+	<script>
+		function alterValue($this){
+			var userInfo = []
+
+			userInfo.push({
+				name:'accountname',
+				value:$('#accountname').val()
+			})
+			userInfo.push({
+				name:'lastname',
+				value:$('#lastname').val()
+			})
+			userInfo.push({
+				name:'firstname',
+				value:$('#firstname').val()
+			})
+			userInfo.push({
+				name:'phonenumber',
+				value:$('#phonenumber').val()
+			})
+			userInfo.push({
+				name:'postalcode',
+				value:$('#postalcode').val()
+			})
+			userInfo.push({
+				name:'address',
+				value:$('#address').val()
+			})
+			
+			$.getJSON("/addUserInfo/showCompanyNum",{
+				userInfo
+			},function(num){
+				console.log("あなたが使えるサービスは" + num + "つです！")
+			})
+		}
+	</script>
+</head>
+
+<body id="top">
+		<%include common/header %>
+	<section id="four" class="wrapper">
+		<div class="inner-narrow">
+			<section>
+				<h4>登録したい情報だけ入力して下さい</h4>
+				<form method="post" action="/addfinished">
+					<div class="row uniform">
+						<div class="12u 12u$(xsmall)">
+							<p>アカウント名</p>
+							<input type="text" id="accountname" name="accountname" value="" placeholder="account name" onChange="alterValue(this)"/>
+						</div>
+						<div class="12u 12u$(xsmall)">
+							<p>保有ポイント<%= userInfo %></p>
+						</div>
+						<div class="12u 12u$(xsmall)">
+							<p>氏</p>
+							<input type="text" id="lastname" name="lastname"  value="" placeholder="last name" onChange="alterValue(this)"/>
+						</div>
+						<div class="12u 12u$(xsmall)">
+							<p>名</p>
+							<input type="text" id="firstname" name="firstname" value="" placeholder="first name" onChange="alterValue(this)"/>
+						</div>
+						<div class="12u 12u$(xsmall)">
+							<p>電話番号</p>
+							<input type="text" id="phonenumber" name="phonenumber" value="" placeholder="phone Number" onChange="alterValue(this)"/>
+						</div>
+						<div class="12u 12u$(xsmall)">
+							<p>郵便番号</p>
+							<input type="text" id="postalcode" name="postalcode" value="" placeholder="postalcode" onChange="alterValue(this)"/>
+						</div>
+						<div class="12u 12u$(xsmall)">
+							<p>住所</p>
+							<input type="text" id="address" name="address" value="" placeholder="address" onChange="alterValue(this)"/>
+						</div>
+					</div>
+					<p>
+					</p>
+					<ul class="actions">
+						<li>
+							<input type="submit" value="Let's add!!" class="special" />
+						</li>
+					</ul>
+				</form>
+			</section>
+		</div>
+	</section>
+	<%include common/footer %>
+</body>
+
+</html>
