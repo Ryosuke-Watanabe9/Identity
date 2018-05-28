@@ -70,6 +70,8 @@ router.get('/', function (req, res, next) {
                 str = query_responses[0].toString()
                 str = str.replace(/\\|\\/g,"")
                 str = str.replace(/\"\"/g,"")
+                str = str.replace(/\:\,/g,"\:\"\"\,")
+                console.log(str)
                 str = JSON.parse(str)
 
                 var query = 'SELECT name from SERVICE_LIST WHERE id IN(SELECT id from SERVICE_USES_LIST WHERE (email = 1'

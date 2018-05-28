@@ -67,10 +67,15 @@ router.get('/', function (req, res, next) {
             if (query_responses[0] instanceof Error) {
                 console.error("error from query = ", query_responses[0])
             } else {
-                console.log(query_responses[0].toString())
+                userInfo = query_responses[0].toString()
+                userInfo = userInfo.replace(/\\|\\/g,"")
+                userInfo = userInfo.replace(/\"\"/g,"")
+                userInfo = userInfo.replace(/\:\,/g,"\:\"\"\,")
+                console.log(userInfo)
+                userInfo = JSON.parse(userInfo)
                 res.render('showMyPage', {
                     title: 'マイページ - Identity -',
-                    userInfo: query_responses[0].toString()
+                    userInfo: userInfo
                 })
             }
         } else {

@@ -67,42 +67,43 @@
 	<section id="four" class="wrapper">
 		<div class="inner-narrow">
 			<section>
-				<h4>登録したい情報だけ入力して下さい</h4>
+				<h4>ユーザー情報</h4>
+				<p>登録情報を変更する場合は、直接入力頂き、変更ボタンをクリック</p>
 				<form method="post" action="/addfinished">
 					<div class="row uniform">
 						<div class="12u 12u$(xsmall)">
 							<p>アカウント名</p>
-							<input type="text" id="accountname" name="accountname" value="" placeholder="account name" onChange="alterValue(this)"/>
+							<input type="text" id="accountname" name="accountname" value="<%= userInfo.userInfo.accountname %>" placeholder="account name" onChange="alterValue(this)"/>
 						</div>
 						<div class="12u 12u$(xsmall)">
-							<p>保有ポイント<%= userInfo %></p>
+							<p>保有ポイント<%= userInfo.point %></p>
 						</div>
 						<div class="12u 12u$(xsmall)">
 							<p>氏</p>
-							<input type="text" id="lastname" name="lastname"  value="" placeholder="last name" onChange="alterValue(this)"/>
+							<input type="text" id="lastname" name="lastname"  value="<%= userInfo.userInfo.lastname %>" placeholder="last name" onChange="alterValue(this)"/>
 						</div>
 						<div class="12u 12u$(xsmall)">
 							<p>名</p>
-							<input type="text" id="firstname" name="firstname" value="" placeholder="first name" onChange="alterValue(this)"/>
+							<input type="text" id="firstname" name="firstname" value="<%= userInfo.userInfo.firstname %>" placeholder="first name" onChange="alterValue(this)"/>
 						</div>
 						<div class="12u 12u$(xsmall)">
 							<p>電話番号</p>
-							<input type="text" id="phonenumber" name="phonenumber" value="" placeholder="phone Number" onChange="alterValue(this)"/>
+							<input type="text" id="phonenumber" name="phonenumber" value="<%= userInfo.userInfo.phonenumber %>" placeholder="phone Number" onChange="alterValue(this)"/>
 						</div>
 						<div class="12u 12u$(xsmall)">
 							<p>郵便番号</p>
-							<input type="text" id="postalcode" name="postalcode" value="" placeholder="postalcode" onChange="alterValue(this)"/>
+							<input type="text" id="postalcode" name="postalcode" value="<%= userInfo.userInfo.postalcode %>" placeholder="postalcode" onChange="alterValue(this)"/>
 						</div>
 						<div class="12u 12u$(xsmall)">
 							<p>住所</p>
-							<input type="text" id="address" name="address" value="" placeholder="address" onChange="alterValue(this)"/>
+							<input type="text" id="address" name="address" value="<%= userInfo.userInfo.address %>" placeholder="address" onChange="alterValue(this)"/>
 						</div>
 					</div>
 					<p>
 					</p>
 					<ul class="actions">
 						<li>
-							<input type="submit" value="Let's add!!" class="special" />
+							<input type="submit" value="変更" class="special" />
 						</li>
 					</ul>
 				</form>
